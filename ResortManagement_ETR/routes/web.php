@@ -91,6 +91,11 @@ Route::post('/update_entrance', [EntranceController::class, 'update']);
 Route::get('/delete_entrance/{type_id}', [EntranceController::class, 'destroy']);
 
 
+
+//Cashier Side 
 //Staff POS
 Route::view('/PointOfSale', 'PointOfSale');
 Route::get('/PointOfSale', [PointOfSale::class, 'index'])->middleware(['auth', 'verified'])->name('entrance_details');
+Route::view('/receipt', 'receipt');
+
+Route::post('/add_trans', [PointOfSale::class, 'store'])->name('trans.data');

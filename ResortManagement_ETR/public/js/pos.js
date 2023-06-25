@@ -18,7 +18,7 @@ $(document).ready(function () {
       
         var selectedValues = [];
     
-    $('input[type="checkbox"][name="cottage"]:checked').each(function() {
+    $('input[type="checkbox"][name="cottage[]"]:checked').each(function() {
       selectedValues.push($(this).val());
     });
         
@@ -26,7 +26,7 @@ $(document).ready(function () {
     
         var selectedPrices = [];
 
-    $('input[type="checkbox"][name="cottage"]:checked').each(function() {
+    $('input[type="checkbox"][name="cottage[]"]:checked').each(function() {
       var price = parseFloat($(this).data('price'));
       selectedPrices.push(price);
         
@@ -38,11 +38,18 @@ $(document).ready(function () {
         }, 0);
 
 
+      if (additional === 0) {
+        sum = sum + adultfee + childrenfee; 
+      } else {
         sum = sum + adultfee + childrenfee + additional; 
-      
+      }
+        
+      sum = sum.toFixed(2);
 
         $('#total').text(sum);
-        $('#total').show();
+      $('#total').show();
+      
+      
 
 
     });
@@ -51,9 +58,12 @@ $(document).ready(function () {
       $('#tendered').on('input', function() {
           var newText = parseInt($(this).val());
 
-          var change = newText - sum;
+        var change = newText - sum;
+        change =  change.toFixed(2);
 
-          $('#change').val(change);
+        $('#change').val(change);
+        
+         $('#totalvalue').val(sum);
 
    
   });

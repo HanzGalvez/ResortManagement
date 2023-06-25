@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class PointOfSale extends Controller
 {
@@ -37,7 +41,55 @@ class PointOfSale extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+
+
+        $currentDate = Carbon::now();
+
+        $currentDay = $currentDate->day;
+        $currentMonth = $currentDate->month;
+        $currentYear = $currentDate->year;
+        $userId = Auth::id();
+
+        $cottage = $request->cottage;
+
+        $cashTendered = strval($request->tendered);
+        $change = strval($request->change);
+
+        $total = doubleval($request->totalvalue);
+        $total2 = strval($request->totalvalue);
+
+
+        $transId =
+            mt_rand(100000, 999999);
+
+
+        DB::insert("INSERT INTO `transaction` (`trans_id`, `adult`, `kids`, `id`, `additional_fee`, `total`, `date`, `day`, `month`, `year`) VALUES ('$transId', '$request->adult', '$request->child', '$userId', '$request->add', '$total', current_timestamp(), '$currentDay', '$currentMonth', ' $currentYear');");
+
+
+        foreach ($cottage as $cottage_id) {
+
+            DB::insert("INSERT INTO `invoice` (`invoice_id`, `trans_id`, `cottage_id`) VALUES (NULL, '$transId', '$cottage_id')");
+            DB::update("UPDATE `cottage` SET `status` = 'Unavailable' WHERE `cottage`.`cottage_id` = $cottage_id;");
+        }
+
+
+
+
+
+        $select = DB::select("SELECT * FROM `cottage` ");
+
+
+        return view('receipt', [
+            'adult' => $request->adult,
+            'child' => $request->child,
+            'total' => $total2,
+            'cash' => $cashTendered,
+            'change' => $change,
+
+
+        ])->with('cottage_id', $cottage)->with('cottage', $select);
     }
 
     /**
