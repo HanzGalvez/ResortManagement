@@ -99,3 +99,7 @@ Route::get('/PointOfSale', [PointOfSale::class, 'index'])->middleware(['auth', '
 Route::view('/receipt', 'receipt');
 
 Route::post('/add_trans', [PointOfSale::class, 'store'])->name('trans.data');
+Route::get('/staff_entrance', [staffController::class, 'entrance'])->middleware(['auth', 'verified']);
+Route::get('/staff_cottage', [staffController::class, 'cottage'])->middleware(['auth', 'verified']);
+Route::view('/staff_dashboard', 'staff_dashboard');
+Route::get('/staff_dashboard', [staffController::class, 'dashboard'])->middleware(['auth', 'verified']);

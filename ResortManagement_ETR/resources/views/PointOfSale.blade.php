@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Point Of Sale</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -139,7 +139,7 @@
 
 
                                             @foreach ($cottage as $cottage)
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-3">
                                                     <input type="checkbox" name="cottage[]" id="cottage[]"
                                                         data-name={{ $cottage->cottage_name }}
                                                         data-price={{ $cottage->price }}

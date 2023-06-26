@@ -14,7 +14,7 @@
 
      <!-- Nav Item - Dashboard -->
      <li class="nav-item active">
-         <a class="nav-link" href="staff_dashboard.php">
+         <a class="nav-link" href="staff_dashboard">
              <i class="fas fa-fw fa-tachometer-alt"></i>
              <span>Dashboard</span></a>
      </li>
@@ -29,14 +29,14 @@
 
      <!-- Nav Item - Staff -->
      <li class="nav-item">
-         <a class="nav-link" href="PointOfSale.php">
+         <a class="nav-link" href="PointOfSale">
              <i class="fas fa-fw fa-table"></i>
              <span> Point Of Sale </span></a>
      </li>
 
      <!-- Nav Item - Attendance -->
      <li class="nav-item">
-         <a class="nav-link" href="availableCottage.php">
+         <a class="nav-link" href="staff_cottage">
              <i class="fas fa-fw fa-chart-area"></i>
              <span>Available Cottage</span></a>
      </li>
@@ -44,7 +44,7 @@
 
      <!-- Nav Item - Attendance -->
      <li class="nav-item">
-         <a class="nav-link" href="entrance_fee.php">
+         <a class="nav-link" href="staff_entrance">
              <i class="fas fa-fw fa-chart-area"></i>
              <span>Entrance Fee</span></a>
      </li>
