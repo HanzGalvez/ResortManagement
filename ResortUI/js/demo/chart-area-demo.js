@@ -27,6 +27,36 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 
+
+
+
+
+
+
+fetch('/total_sales')
+  .then(response => response.json())
+  .then(data => {
+    // Extract the column data and assign it to an array
+    const columnData = data.map(item => total_sales); // Replace 'columnName' with the actual column name
+
+    // Handle the retrieved data here
+    console.log(columnData);
+
+    // You can perform further operations or call functions that use the columnData array
+    processData(columnData);
+  })
+  .catch(error => {
+    // Handle any errors that occurred during the request
+    console.error(error);
+  });
+
+
+
+
+
+
+
+
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
@@ -42,11 +72,11 @@ var myLineChart = new Chart(ctx, {
       pointBackgroundColor: "rgba(78, 115, 223, 1)",
       pointBorderColor: "rgba(78, 115, 223, 1)",
       pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+      pointHoverBackgroundColor: "rgba(78, 115, 223s, 1)",
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [0, columnData[0], columnData[1], columnData[2], columnData[3], 100000, 100000, 100000, 100000, 100000, 100000, 100000],
     }],
   },
   options: {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ResortController extends Controller
 {
@@ -80,5 +81,18 @@ class ResortController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+    // Monthly Sales 
+
+    public function monthly()
+    {
+        $query = "SELECT month AS month, year AS year, SUM(total) AS total_sales FROM transaction WHERE year = YEAR(CURRENT_DATE) GROUP BY year, month ORDER BY year, month;";
+
+        $data = DB::select($query);
+
+        return response()->json($data);
     }
 }

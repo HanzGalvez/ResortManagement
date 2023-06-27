@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Dashboard</title>
+    <title>Document</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +27,9 @@
         <div id="wrapper">
 
 
-            <?php include 'partials/staff_sidebar.php'; ?>
+            @include('partials.sidebar', [
+                'data' => 'dashboard',
+            ])
             <!-- Combined Dashboard Partials Start -->
 
             <!-- Combined Dashboard Partials End -->
@@ -60,8 +62,8 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Earnings (Monthly)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    P{{ $monthy }}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">P
+                                                </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -71,10 +73,6 @@
                                 </div>
                             </div>
 
-                            <script>
-                                let variabA = '{{ $id }}';
-                            </script>
-
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
@@ -83,8 +81,8 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     Earnings (Annual)</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    P{{ $annual }}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">P
+                                                </div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -101,7 +99,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Tasks
+                                                    Present Employee
                                                 </div>
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-auto">
@@ -132,7 +130,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Pending Requests</div>
+                                                    Today's Customer</div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                             </div>
                                             <div class="col-auto">
