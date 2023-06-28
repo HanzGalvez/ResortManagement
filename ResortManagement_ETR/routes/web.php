@@ -55,7 +55,39 @@ ORDER BY year;");
     $year_sales =
         DB::select("SELECT year, SUM(total) AS yearly_sales FROM transaction GROUP BY year ORDER BY year;");
 
-    return view('dashboard', ['total' => $totalCust, 'id' => 1])->with('monthy', $monthly)->with('annual', $yearly)->with('year_sales', $year_sales);
+    $present_emp = DB::select("SELECT COUNT(*) AS present
+FROM attendance
+WHERE DATE(date) = CURRENT_DATE AND time_in IS NOT NULL;");
+
+    $present = $present_emp[0]->present;
+
+
+
+
+    //Monthly Percentage
+
+    $months = [];
+
+    $percentage =
+        DB::select("SELECT month AS month, SUM(adult) + SUM(kids) AS total_sum, ((SUM(adult) + SUM(kids)) / (SELECT SUM(adult) + SUM(kids) FROM transaction) * 100) AS percentage FROM transaction GROUP BY month;");
+
+    for ($j = 1; $j <= 12; $j++) {
+        $found = false; // Flag to track if a match is found for the month
+
+        for ($i = 0; $i < count($percentage); $i++) {
+            if ($percentage[$i]->month == $j) {
+                array_push($months, round($percentage[$i]->percentage * 100 / 100));
+                $found = true;
+                break; // Exit the inner loop once a match is found
+            }
+        }
+
+        if (!$found) {
+            array_push($months, 0);
+        }
+    }
+
+    return view('dashboard', ['total' => $totalCust, 'id' => 1, 'present' => $present])->with('monthy', $monthly)->with('annual', $yearly)->with('year_sales', $year_sales)->with('monthly_percentage', $months);
 })->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 
 
@@ -67,7 +99,7 @@ Route::middleware('auth')->group(function () {
 
     // Route::get('/admin_dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     // Route::get('/staff_dashboard', [staffController::class, 'dashboard'])->name('staff.dashboard');
-    Route::get('/emp_dashboard', [EmployeeController::class, 'index'])->name('emp.dashboard');
+
 });
 
 require __DIR__ . '/auth.php';
@@ -106,6 +138,11 @@ Route::get('/attendance', function () {
 
 
 Route::middleware('auth', 'verified', 'admin')->group(function () {
+
+
+    Route::get('/profit', [ResortController::class, 'profit']);
+
+
     Route::get('/staff', [staffController::class, 'index'])->middleware(['auth', 'verified'])->name('staff');
     Route::get('/cottage_details', [CottageController::class, 'cottages'])->middleware(['auth', 'verified'])->name('cottage_details');
 
@@ -123,6 +160,8 @@ Route::middleware('auth', 'verified', 'admin')->group(function () {
 
     Route::post('/update_cottage', [CottageController::class, 'update']);
     Route::get('/delete_cottage/{cottage_id}', [CottageController::class, 'destroy']);
+    Route::get('/reset', [CottageController::class, 'reset']);
+
 
     Route::post('/update_entrance', [EntranceController::class, 'update']);
     Route::get('/delete_entrance/{type_id}', [EntranceController::class, 'destroy']);
@@ -148,6 +187,8 @@ Route::middleware('auth', 'verified', 'staff')->group(function () {
 
 //Employee Side 
 Route::middleware('auth', 'verified', 'emp')->group(function () {
+
+    Route::get('/employee_dashboard', [EmployeeController::class, 'index'])->name('emp.dashboard');
     Route::get('/emp_attendance',  [EmployeeController::class, 'attendance']);
     Route::get('/emp_logs',  [EmployeeController::class, 'logs']);
     Route::get('/timein',  [EmployeeController::class, 'store']);

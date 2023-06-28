@@ -68,7 +68,7 @@
                                                 <th>Time Out </th>
                                                 <th>Date</th>
 
-                                                <th>Actions</th>
+
 
                                             </tr>
                                         </thead>
@@ -79,7 +79,7 @@
                                                 <th>Time Out </th>
                                                 <th>Date</th>
 
-                                                <th>Actions</th>
+
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -88,20 +88,17 @@
 
 
                                             @foreach ($attendance as $attendance)
+                                                @php
+                                                    
+                                                    $date = substr($attendance->date, 0, 10);
+                                                @endphp
                                                 <tr>
                                                     <td>{{ $attendance->name }}</td>
-                                                    <td>{{ $attendance->time_in }}</td>
-                                                    <td>{{ $attendance->time_out }}</td>
-                                                    <td>{{ $attendance->date }}</td>
+                                                    <td>{{ date('h:i A', strtotime($attendance->time_in)) }}</td>
+                                                    <td>{{ date('h:i A', strtotime($attendance->time_out)) }}</td>
+                                                    <td>{{ $date }}</td>
 
-                                                    <td>
 
-                                                        <i class='fas fa-fw fa-pencil-alt editedit'></i>
-                                                        &nbsp;
-
-                                                        <i class='fas fa-fw fa-trash-alt trashtrash'></i>
-                                                        &nbsp;
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

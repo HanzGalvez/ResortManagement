@@ -62,6 +62,7 @@ class CottageController extends Controller
 
         DB::update("UPDATE `cottage` SET `cottage_name` = '$request->cottage', `capacity` = '$request->capacity', `price` = '$request->price', `status` = 'Available' WHERE `cottage`.`cottage_id` = '$request->cottage_id';");
 
+        session()->flash('success', 'Record updated successfully.');
         return redirect('cottage_details')->with(['code' => 'successfuly edited']);
     }
 
@@ -75,7 +76,15 @@ class CottageController extends Controller
     public function destroy($id)
     {
         DB::delete("DELETE FROM cottage WHERE `cottage`.`cottage_id` = $id");
+        session()->flash('deleted', 'Record deleted successfully.');
 
         return redirect('cottage_details')->with(['code' => 'successfuly deleted']);
+    }
+
+    public function reset()
+    {
+        DB::update("UPDATE cottage SET status = 'Available';");
+
+        return redirect('cottage_details')->with(['code' => 'successfuly reset']);
     }
 }

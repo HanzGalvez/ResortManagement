@@ -97,6 +97,9 @@
                                         <label for="text">Adult : </label>
                                         <input type="text" name="adult" class="form-style" id="adult"
                                             autocomplete="off">
+                                        @error('adult')
+                                            <span style="color:red;">{{ $message }}</span>
+                                        @enderror
                                         <i class="input-icon uil uil-at"></i>
                                     </div>
 
@@ -113,6 +116,9 @@
                                         <label for="email">Children : </label>
                                         <input type="text" name="child" class="form-style" id="child"
                                             autocomplete="off">
+                                        @error('child')
+                                            <span style="color:red;">{{ $message }}</span>
+                                        @enderror
                                         <i class="input-icon uil uil-at"></i>
                                     </div>
 
@@ -139,14 +145,26 @@
 
 
                                             @foreach ($cottage as $cottage)
-                                                <div class="col-sm-3">
-                                                    <input type="checkbox" name="cottage[]" id="cottage[]"
-                                                        data-name={{ $cottage->cottage_name }}
-                                                        data-price={{ $cottage->price }}
-                                                        value="{{ $cottage->cottage_id }}">
-                                                    <label for="text">
-                                                        {{ $cottage->cottage_name }}
-                                                    </label>
+                                                <div class="col-sm-4">
+                                                    <div class="card">
+                                                        <input style="margin-left: 20px; margin-top: 10px"
+                                                            type="checkbox" name="cottage[]" id="cottage[]"
+                                                            data-name={{ $cottage->cottage_name }}
+                                                            data-price={{ $cottage->price }}
+                                                            value="{{ $cottage->cottage_id }}">
+                                                        <center>
+                                                            <label for="text">
+                                                                P{{ number_format($cottage->price, 2) }}
+                                                            </label> <br>
+
+                                                            <label for="text">
+                                                                {{ $cottage->cottage_name }}
+                                                            </label>
+
+                                                        </center>
+                                                    </div>
+                                                    <br>
+
                                                 </div>
                                             @endforeach
 
@@ -189,7 +207,9 @@
                                     <div class="form-group">
                                         <label for="email">Additional Fee : </label>
                                         <input type="text" name="add" class="form-style" id="add"
-                                            autocomplete="off">
+                                            autocomplete="off"> @error('add')
+                                            <span style="color:red;">{{ $message }}</span>
+                                        @enderror
                                         <i class="input-icon uil uil-at"></i>
                                     </div>
 
@@ -246,7 +266,9 @@
                                     <div class="form-group">
                                         <label for="text">Cash Tendered : </label>
                                         <input type="text" name="tendered" class="form-style" id="tendered"
-                                            autocomplete="off">
+                                            autocomplete="off"> @error('tendered')
+                                            <span style="color:red;">{{ $message }}</span>
+                                        @enderror
                                         <i class="input-icon uil uil-at"></i>
                                     </div>
 
@@ -306,15 +328,7 @@
                 </div>
                 <!-- End of Main Content -->
 
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2020</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
+                <br><br><br>
 
             </div>
             <!-- End of Content Wrapper -->

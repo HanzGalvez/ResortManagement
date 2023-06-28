@@ -91,6 +91,7 @@ class EntranceController extends Controller
     {
         DB::update("UPDATE `entrance_fee` SET  `type_name` = '$request->type', `fee` = '$request->fee' WHERE `entrance_fee`.`type_id` = $request->type_id;");
 
+        session()->flash('success', 'Record updated successfully.');
         return redirect('entrance_details')->with(['code' => 'successfuly edited']);
     }
 
@@ -103,6 +104,7 @@ class EntranceController extends Controller
     public function destroy($id)
     {
         DB::delete("DELETE FROM entrance_fee WHERE `entrance_fee`.`type_id` = $id");
+        session()->flash('deleted', 'Record deleted successfully.');
         return redirect('entrance_details')->with(['code' => 'successfuly deleted']);
     }
 }

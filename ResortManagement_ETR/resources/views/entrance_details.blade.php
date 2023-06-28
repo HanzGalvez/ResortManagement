@@ -79,7 +79,36 @@
 
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">ENTRANCE FEE</h1>
+                        @if (session('success'))
+                            <div class="alert alert-success" id="success-alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
 
+                        @if (session('deleted'))
+                            <div class="alert alert-success" id="deleted-alert">
+                                {{ session('deleted') }}
+                            </div>
+                        @endif
+
+                        <script>
+                            // Wait for 3 seconds (3000 milliseconds) and then hide the success alert
+                            setTimeout(function() {
+                                var successAlert = document.getElementById('success-alert');
+                                if (successAlert) {
+                                    successAlert.style.display = 'none';
+                                }
+                            }, 3000);
+
+
+                            // Wait for 3 seconds (3000 milliseconds) and then hide the deleted alert
+                            setTimeout(function() {
+                                var deletedAlert = document.getElementById('deleted-alert');
+                                if (deletedAlert) {
+                                    deletedAlert.style.display = 'none';
+                                }
+                            }, 3000);
+                        </script>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -243,8 +272,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <button class="btn btn-primary" type="submit">Save</button> </form>
+                        <button class="btn btn-outline-danger" type="button" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-outline-primary" type="submit">Save</button> </form>
                     </div>
                 </div>
             </div>

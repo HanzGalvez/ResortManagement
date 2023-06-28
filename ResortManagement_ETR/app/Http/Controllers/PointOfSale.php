@@ -43,8 +43,17 @@ class PointOfSale extends Controller
     {
 
 
+        $this->validate($request, [
+            'adult' => 'required|numeric',
+            'child' => 'numeric',
+            'add' => 'numeric',
+            'tendered' => 'numeric',
 
 
+
+        ]);
+
+        date_default_timezone_set('Asia/Manila');
         $currentDate = Carbon::now();
 
         $currentDay = $currentDate->day;

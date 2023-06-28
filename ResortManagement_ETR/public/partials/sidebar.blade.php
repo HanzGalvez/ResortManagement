@@ -13,10 +13,10 @@
      <hr class="sidebar-divider my-0">
 
      <!-- Nav Item - Dashboard -->
-     <li class="nav-item {{$data == 'dashboard' ? 'active' : ""}}">
+     <li class="nav-item {{ $data == 'dashboard' ? 'active' : '' }}">
          <a class="nav-link" href="dashboard">
              <i class="fas fa-fw fa-tachometer-alt"></i>
-             <span>Dashboard {{$data}}</span></a>
+             <span>Dashboard {{ $data }}</span></a>
      </li>
 
      <!-- Divider -->
@@ -28,7 +28,7 @@
      </div>
 
      <!-- Nav Item - Staff -->
-     <li class="nav-item  {{$data == 'staff' ? 'active' : ""}}">
+     <li class="nav-item  {{ $data == 'staff' ? 'active' : '' }}">
          <a class="nav-link" href="staff">
              <i class="fas fa-fw fa-table"></i>
              <span>Staff</span></a>
@@ -43,16 +43,17 @@
 
      <!-- Nav Item - Reservations -->
      <li class="nav-item">
-         <a class="nav-link" href="charts">
+         <a class="nav-link" href="profit">
              <i class="fas fa-fw fa-chart-area"></i>
-             <span>Reservations</span></a>
+             <span>Profit</span></a>
      </li>
 
 
 
      <!-- Nav Item - Pages Collapse Menu -->
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+             aria-expanded="true" aria-controls="collapseTwo">
              <i class="fas fa-fw fa-cog"></i>
              <span>Cottage </span>
          </a>
@@ -69,11 +70,13 @@
 
      <!-- Nav Item - Utilities Collapse Menu --> `
      <li class="nav-item">
-         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+             aria-expanded="true" aria-controls="collapseUtilities">
              <i class="fas fa-fw fa-wrench"></i>
              <span>Entrance</span>
          </a>
-         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+             data-parent="#accordionSidebar">
              <div class="bg-white py-2 collapse-inner rounded">
 
                  <a class="collapse-item" href="entrance_details">Details</a>

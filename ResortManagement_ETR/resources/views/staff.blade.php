@@ -70,7 +70,7 @@
 
                                                 <th>Email</th>
                                                 <th>Role</th>
-                                                <th>Actions</th>
+
 
                                             </tr>
                                         </thead>
@@ -81,7 +81,7 @@
 
                                                 <th>Email</th>
                                                 <th>Role</th>
-                                                <th>Actions</th>
+
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -94,17 +94,7 @@
                                                     <td>{{ $users->email }}</td>
                                                     <td>{{ $users->role }}</td>
 
-                                                    <td>
 
-                                                        <i class='fas fa-fw fa-pencil-alt editedit' data-toggle="modal"
-                                                            data-target="#editModal"></i>
-                                                        &nbsp;
-
-                                                        <a onclick="return confirm('Are you sure?')"
-                                                            href="/delete_users/{{ $users->id }}"> <i
-                                                                class='fas fa-fw fa-trash-alt trashtrash'></i></a>
-                                                        &nbsp;
-                                                    </td>
                                                 </tr>
                                             @endforeach
 

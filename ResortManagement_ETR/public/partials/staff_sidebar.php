@@ -49,12 +49,6 @@
              <span>Entrance Fee</span></a>
      </li>
 
-     <!-- Nav Item - Reservations -->
-     <li class="nav-item">
-         <a class="nav-link" href="charts.html">
-             <i class="fas fa-fw fa-chart-area"></i>
-             <span>Logout</span></a>
-     </li>
 
 
      <!-- Divider -->

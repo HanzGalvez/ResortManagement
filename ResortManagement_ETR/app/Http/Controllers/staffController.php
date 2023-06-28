@@ -19,8 +19,11 @@ class staffController extends Controller
 
         $select = DB::select("SELECT year AS year, month AS month, SUM(total) AS monthly_earnings FROM transaction GROUP BY year, month ORDER BY year, month;");
 
-
-        $monthly = number_format($select[0]->monthly_earnings, 2, '.', '');
+        if (count($select) > 0) {
+            $monthly = number_format($select[0]->monthly_earnings, 2, '.', '');
+        } else {
+            $monthly = 0;
+        }
 
 
         $select = DB::select("SELECT year AS year, SUM(total) AS annual_earnings
@@ -30,15 +33,27 @@ ORDER BY year;");
 
         $userData1 = auth()->user();
 
-        $yearly = number_format($select[0]->annual_earnings, 2, '.', '');
-        return view('staff_dashboard', ['userData' => $userData1, 'id' => 1])->with('monthy', $monthly)->with('annual', $yearly);
+        if (count($select) > 0) {
+            $yearly = number_format($select[0]->annual_earnings, 2, '.', '');
+        } else {
+            $yearly = 0;
+        }
+
+
+
+        $year_sales =
+            DB::select("SELECT year, SUM(total) AS yearly_sales FROM transaction GROUP BY year ORDER BY year;");
+
+
+
+        return view('staff_dashboard', ['userData' => $userData1, 'id' => 1])->with('monthy', $monthly)->with('annual', $yearly)->with('yearly_sales', $year_sales);
     }
 
 
 
     public function index()
     {
-        $select = DB::select("SELECT * FROM `users` WHERE role = 'staff' OR role ='cashier'");
+        $select = DB::select("SELECT * FROM `users` WHERE role = 'staff' OR role ='employee'");
         return view('staff')->with('users', $select);
     }
 

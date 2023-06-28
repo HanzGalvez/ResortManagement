@@ -81,7 +81,7 @@
                             <div class="card" style="width: 50%; height: auto">
                                 <div class="card-body mx-4">
                                     <div class="container">
-                                        <p class="my-5 mx-5" style="font-size: 30px;">Thank for your purchase</p>
+                                        <p class="my-5 mx-5" style="font-size: 30px;">Thank for your visit</p>
                                         <div class="row">
                                             <ul class="list-unstyled">
 
@@ -97,7 +97,7 @@
 
                                             @php
                                                 $adultSub = $adult * 100;
-                                                $childSub = $child * 100;
+                                                $childSub = $child * 50;
                                                 
                                             @endphp
 
@@ -114,12 +114,12 @@
                                                         <tr>
                                                             <td>Adult</td>
                                                             <td>{{ $adult }}</td>
-                                                            <td>{{ $adultSub }}</td>
+                                                            <td>{{ number_format($adultSub, 2) }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Children</td>
                                                             <td>{{ $child }}</td>
-                                                            <td>{{ $childSub }}</td>
+                                                            <td>{{ number_format($childSub, 2) }}</td>
                                                         </tr>
 
 
@@ -133,7 +133,8 @@
                                                                     <tr>
                                                                         <td>{{ $cottage[$i]->cottage_name }}</td>
                                                                         <td>&nbsp;</td>
-                                                                        <td>{{ $cottage[$i]->price }}</td>
+                                                                        <td>{{ number_format($cottage[$i]->price, 2) }}
+                                                                        </td>
                                                                     </tr>
                                                                 @endif
                                                             @endfor
@@ -142,7 +143,7 @@
                                                         <tr>
                                                             <td>&nbsp;</td>
                                                             <th>Total</th>
-                                                            <th>{{ $total }}</th>
+                                                            <th>{{ number_format($total, 2) }}</th>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -161,7 +162,7 @@
 
                                                             <th>Cash Tendered</th>
                                                             <th>&nbsp;</th>
-                                                            <th>{{ $cash }}</th>
+                                                            <th>{{ number_format($cash, 2) }}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>

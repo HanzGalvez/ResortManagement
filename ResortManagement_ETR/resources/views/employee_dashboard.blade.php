@@ -15,8 +15,46 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.1/index.global.min.js'></script>
 
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+
+                events: [
+                    @foreach ($attendance as $present)
+                        @php
+                            $eventMonth = substr($present->date, 5, 2); // Extract the month portion from the date
+                        @endphp
+                        @if ($eventMonth === date('m')) // Only include events for the current month
+                            {
+                                id: '{{ $present->attendance_id }}',
+                                title: "Present",
+                                start: '{{ substr($present->date, 0, 10) }}',
+                            },
+                        @endif
+                    @endforeach
+                ],
+
+                eventClick: function(info) {
+
+
+
+
+                }
+
+            });
+
+
+
+            $('#calendar').css('font-size', '13px');
+            calendar.render();
+        });
+    </script>
 </head>
 
 <body>
@@ -111,42 +149,7 @@
 
 
 
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                var calendarEl = document.getElementById('calendar');
-                                var calendar = new FullCalendar.Calendar(calendarEl, {
-                                    initialView: 'dayGridMonth',
 
-                                    events: [
-                                        @foreach ($attendance as $present)
-                                            @php
-                                                $eventMonth = substr($present->date, 5, 2); // Extract the month portion from the date
-                                            @endphp
-                                            @if ($eventMonth == date('m')) // Only include events for the current month
-                                                {
-                                                    id: '{{ $present->attendance_id }}',
-
-                                                    start: '{{ substr($present->date, 0, 10) }}',
-                                                },
-                                            @endif
-                                        @endforeach
-                                    ],
-
-                                    eventClick: function(info) {
-
-
-
-
-                                    }
-
-                                });
-
-
-
-                                $('#calendar').css('font-size', '13px');
-                                calendar.render();
-                            });
-                        </script>
 
                         <center>
                             <div id='calendar' style="width: 60%"></div>
@@ -201,13 +204,9 @@
         <!-- Custom scripts for all pages-->
         <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
 
+        <script src="js/demo/calendar.js"></script>
 
 
 

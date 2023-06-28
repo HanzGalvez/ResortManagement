@@ -17,6 +17,24 @@ class ResortController extends Controller
         //
     }
 
+    public function profit()
+    {
+
+
+        $thisday = DB::select("SELECT SUM(total) AS total_sales FROM transaction WHERE DATE(date) = CURRENT_DATE;");
+        $day = $thisday[0]->total_sales;
+
+        $thismonth = DB::select("SELECT SUM(total) AS total_sales
+        
+FROM transaction
+WHERE MONTH(date) = MONTH(CURRENT_DATE())
+  AND YEAR(date) = YEAR(CURRENT_DATE());");
+        $month = $thismonth[0]->total_sales;
+
+
+        return view('profit', ['daily' => $day, 'monthly' => $month]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

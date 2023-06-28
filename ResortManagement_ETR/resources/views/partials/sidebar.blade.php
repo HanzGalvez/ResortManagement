@@ -41,12 +41,7 @@
              <span>Attendance</span></a>
      </li>
 
-     <!-- Nav Item - Reservations -->
-     <li class="nav-item">
-         <a class="nav-link" href="charts">
-             <i class="fas fa-fw fa-chart-area"></i>
-             <span>Reservations</span></a>
-     </li>
+
 
 
 

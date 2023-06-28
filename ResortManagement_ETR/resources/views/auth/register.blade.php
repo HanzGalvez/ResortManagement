@@ -44,7 +44,7 @@
 
             <select id="role" class="block mt-1 w-full" name="role" required>
                 <option value="" disabled selected>Select a role</option>
-                <option value="admin">Admin</option>
+
                 <option value="staff">Cashier</option>
                 <option value="employee">Employee</option>
             </select>
