@@ -103,39 +103,53 @@ Route::get('/attendance', function () {
 //Admin
 
 //Monthly Sales na pinupunta yung data sa JS area chart 
+
+
+Route::middleware('auth', 'verified', 'admin')->group(function () {
+    Route::get('/staff', [staffController::class, 'index'])->middleware(['auth', 'verified'])->name('staff');
+    Route::get('/cottage_details', [CottageController::class, 'cottages'])->middleware(['auth', 'verified'])->name('cottage_details');
+
+    Route::get('/entrance_details', [EntranceController::class, 'entrance'])->middleware(['auth', 'verified'])->name('entrance_details');
+
+    Route::get('/attendance', [AttendanceController::class, 'index'])->middleware(['auth', 'verified'])->name('attendance');
+
+    Route::post('/add_entrance', [EntranceController::class, 'store'])->name('entrance.data');
+    Route::view('/add_entrance', 'add_entrance');
+
+
+
+    Route::post('/add_cottage', [CottageController::class, 'store'])->name('store.data');
+    Route::view('/add_cottage', 'add_cottage');
+
+    Route::post('/update_cottage', [CottageController::class, 'update']);
+    Route::get('/delete_cottage/{cottage_id}', [CottageController::class, 'destroy']);
+
+    Route::post('/update_entrance', [EntranceController::class, 'update']);
+    Route::get('/delete_entrance/{type_id}', [EntranceController::class, 'destroy']);
+});
+
 Route::get('/total_sales', [ResortController::class, 'monthly'])->middleware(['auth', 'verified']);
-
-Route::get('/staff', [staffController::class, 'index'])->middleware(['auth', 'verified'])->name('staff');
-Route::get('/cottage_details', [CottageController::class, 'cottages'])->middleware(['auth', 'verified'])->name('cottage_details');
-
-Route::get('/entrance_details', [EntranceController::class, 'entrance'])->middleware(['auth', 'verified'])->name('entrance_details');
-
-Route::get('/attendance', [AttendanceController::class, 'index'])->middleware(['auth', 'verified'])->name('attendance');
-
-Route::post('/add_entrance', [EntranceController::class, 'store'])->name('entrance.data');
-Route::view('/add_entrance', 'add_entrance');
-
-
-
-Route::post('/add_cottage', [CottageController::class, 'store'])->name('store.data');
-Route::view('/add_cottage', 'add_cottage');
-
-Route::post('/update_cottage', [CottageController::class, 'update']);
-Route::get('/delete_cottage/{cottage_id}', [CottageController::class, 'destroy']);
-
-Route::post('/update_entrance', [EntranceController::class, 'update']);
-Route::get('/delete_entrance/{type_id}', [EntranceController::class, 'destroy']);
-
 
 
 //Cashier Side 
-//Staff POS
-Route::view('/PointOfSale', 'PointOfSale');
-Route::get('/PointOfSale', [PointOfSale::class, 'index'])->middleware(['auth', 'verified'])->name('entrance_details');
-Route::view('/receipt', 'receipt');
+Route::middleware('auth', 'verified', 'staff')->group(function () {
+    //Staff POS
+    Route::view('/PointOfSale', 'PointOfSale');
+    Route::get('/PointOfSale', [PointOfSale::class, 'index'])->name('entrance_details');
+    Route::view('/receipt', 'receipt');
 
-Route::post('/add_trans', [PointOfSale::class, 'store'])->name('trans.data');
-Route::get('/staff_entrance', [staffController::class, 'entrance'])->middleware(['auth', 'verified']);
-Route::get('/staff_cottage', [staffController::class, 'cottage'])->middleware(['auth', 'verified']);
-// Route::view('/staff_dashboard', 'staff_dashboard');
-Route::get('/staff_dashboard',  [staffController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('staff.dashboard');
+    Route::post('/add_trans', [PointOfSale::class, 'store'])->name('trans.data');
+    Route::get('/staff_entrance', [staffController::class, 'entrance']);
+    Route::get('/staff_cottage', [staffController::class, 'cottage']);
+    // Route::view('/staff_dashboard', 'staff_dashboard');
+    Route::get('/staff_dashboard',  [staffController::class, 'dashboard'])->name('staff.dashboard');
+});
+
+
+//Employee Side 
+Route::middleware('auth', 'verified', 'emp')->group(function () {
+    Route::get('/emp_attendance',  [EmployeeController::class, 'attendance']);
+    Route::get('/emp_logs',  [EmployeeController::class, 'logs']);
+    Route::get('/timein',  [EmployeeController::class, 'store']);
+    Route::get('/timeout',  [EmployeeController::class, 'timeout']);
+});

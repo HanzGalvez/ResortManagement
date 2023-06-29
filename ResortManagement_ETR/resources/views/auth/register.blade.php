@@ -45,8 +45,8 @@
             <select id="role" class="block mt-1 w-full" name="role" required>
                 <option value="" disabled selected>Select a role</option>
                 <option value="admin">Admin</option>
-                <option value="cashier">Cashier</option>
-                <option value="staff">Staff</option>
+                <option value="staff">Cashier</option>
+                <option value="employee">Employee</option>
             </select>
 
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
