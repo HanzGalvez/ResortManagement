@@ -5,20 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-
-
-
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
@@ -39,18 +32,9 @@
                         @endif
                     @endforeach
                 ],
-
-                eventClick: function(info) {
-
-
-
-
-                }
+                eventClick: function(info) {}
 
             });
-
-
-
             $('#calendar').css('font-size', '13px');
             calendar.render();
         });
@@ -58,41 +42,24 @@
 </head>
 
 <body>
-
     <x-app-layout>
-
-
-
         <!-- Page Wrapper -->
         <div id="wrapper">
-
             <?php include 'partials/emp_sidebar.php'; ?>
             <!-- Combined Dashboard Partials Start -->
-
             <!-- Combined Dashboard Partials End -->
-
-
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
                 <div id="content">
 
-
-
-
-
-
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-
                         <br><br>
-
 
                         <!-- Content Row -->
                         <div class="row">
-
-
 
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-6 col-md-6 mb-4">
@@ -135,21 +102,7 @@
                                 </div>
                             </div>
 
-
-
-
-
-
-
                         </div>
-
-
-
-
-
-
-
-
 
                         <center>
                             <div id='calendar' style="width: 60%"></div>

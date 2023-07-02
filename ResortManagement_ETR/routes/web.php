@@ -36,20 +36,35 @@ Route::get('/dashboard', function () {
     $select = DB::select("SELECT year AS year, month AS month, SUM(total) AS monthly_earnings FROM transaction GROUP BY year, month ORDER BY year, month;");
 
 
-    $monthly = number_format($select[0]->monthly_earnings, 2, '.', '');
-
+    if (count($select) > 0) {
+        $monthly = number_format($select[0]->monthly_earnings, 2, '.', '');
+    } else {
+        $monthly = 0;
+    }
 
     $select = DB::select("SELECT year AS year, SUM(total) AS annual_earnings
 FROM transaction
 GROUP BY year
 ORDER BY year;");
 
-    $yearly = number_format($select[0]->annual_earnings, 2, '.', '');
+    if (count($select) > 0) {
+        $yearly = number_format($select[0]->annual_earnings, 2, '.', '');
+    } else {
+        $yearly = 0;
+    }
+
+
 
 
     $customer =
         DB::select("SELECT SUM(adult) as totalAdult, SUM(kids) as totalKids FROM `transaction` WHERE day = DAY(CURRENT_DATE) AND month = MONTH(CURRENT_DATE) AND year = YEAR(CURRENT_DATE);");
 
+
+    if (count($customer) > 0) {
+        $totalCust = $customer[0]->totalAdult + $customer[0]->totalKids;
+    } else {
+        $totalCust = 0;
+    }
     $totalCust = $customer[0]->totalAdult + $customer[0]->totalKids;
 
     $year_sales =
@@ -60,9 +75,6 @@ FROM attendance
 WHERE DATE(date) = CURRENT_DATE AND time_in IS NOT NULL;");
 
     $present = $present_emp[0]->present;
-
-
-
 
     //Monthly Percentage
 

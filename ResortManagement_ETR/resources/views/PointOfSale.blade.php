@@ -159,6 +159,10 @@
 
                                                             <label for="text">
                                                                 {{ $cottage->cottage_name }}
+                                                            </label> <br>
+
+                                                            <label for="text">
+                                                                {{ $cottage->capacity }}
                                                             </label>
 
                                                         </center>
